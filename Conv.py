@@ -7,17 +7,17 @@ import re
 import numpy as np
 
 def conv_make_tasks(jdata, output_dir='new_job'):
-    POSCAR=jdata.get('POSCAR')
-    INCAR=jdata.get('INCAR')
-    POTCAR=jdata.get('POTCAR')
-    test=jdata.get('test')
+    POSCAR=jdata.get('POSCAR', './POSCAR')
+    INCAR=jdata.get('INCAR', './INCAR')
+    POTCAR=jdata.get('POTCAR', './POTCAR')
+    test=jdata.get('test', None)
 
     test_KSPACING=test.get('KSPACING', [])
     test_ENCUT=test.get('ENCUT', [])
     test_SIGMA=test.get('SIGMA', [])
 
     KSPACING_sub_p=re.compile(r'KSPACING\s*=.*')
-    ENCUT_sub_p=re.compile(r'KSPACING\s*=.*')
+    ENCUT_sub_p=re.compile(r'ENCUT\s*=.*')
     SIGMA_sub_p=re.compile(r'SIGMA\s*=.*')
 
     with open(INCAR, 'r') as f:
